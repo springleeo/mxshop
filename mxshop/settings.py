@@ -30,10 +30,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'users.UserProfile'
+
 # Application definition
 
 INSTALLED_APPS = [
 	'django.contrib.auth',
+	'django.contrib.admin',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
@@ -42,7 +45,11 @@ INSTALLED_APPS = [
 	'goods.apps.GoodsConfig',
 	'trade.apps.TradeConfig',
 	'user_operation.apps.UserOperationConfig',
-	'DjangoUeditor'
+	'DjangoUeditor',
+	'xadmin',
+	'crispy_forms',
+	'django_filters',
+	'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +132,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = "/media/"
+STATICFILES_DIRS = (
+	os.path.join(BASE_DIR, "static"),
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
