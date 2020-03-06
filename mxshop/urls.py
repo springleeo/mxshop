@@ -16,7 +16,9 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 import xadmin
+from goods.view_base import GoodsListView
 
 urlpatterns = [
-       path('xadmin/', xadmin.site.urls),
+	path('xadmin/', xadmin.site.urls),
+	path('goods/', GoodsListView.as_view(), name='goods_list')
 ]
