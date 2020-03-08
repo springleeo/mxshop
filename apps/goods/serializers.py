@@ -3,6 +3,7 @@ from goods.models import Goods, GoodsCategory
 
 
 # class GoodsSerializer(serializers.Serializer):
+# 	"""3.使用django rest framework的APIview和serializers.Serializer实现商品列表页"""
 # 	name = serializers.CharField(required=True, max_length=100)
 # 	click_num = serializers.IntegerField(default=0)
 # 	goods_front_image = serializers.ImageField()
