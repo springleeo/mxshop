@@ -14,6 +14,8 @@ class GoodsCategorySerializer(serializers.ModelSerializer):
 	class Meta:
 		model = GoodsCategory
 		fields = '__all__'
+		# 添加深度，会显示category类别中字段的外键信息
+		depth = 1
 
 
 class GoodsSerializer(serializers.ModelSerializer):
