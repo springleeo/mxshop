@@ -138,7 +138,7 @@ STATICFILES_DIRS = (
 MEDIA_URL = "/media/"  # 图片链接自动补全需求
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # 图片单独访问需要配置路径
 
-REST_FRAMEWORK = {
-	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-	'PAGE_SIZE': 10,
-}
+# REST_FRAMEWORK = {
+# 	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+# 	'PAGE_SIZE': 10,
+# }

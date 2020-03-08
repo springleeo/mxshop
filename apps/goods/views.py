@@ -12,6 +12,7 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import ListModelMixin
 from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 
 
 # class GoodsListView(View):
@@ -78,8 +79,28 @@ from rest_framework.generics import ListAPIView
 # 		return self.list(request, *args, **kwargs)
 
 
+# class GoodsListView(ListAPIView):
+# 	"""7.使用django rest framework的ListAPIView实现商品列表页"""
+# 	# 定义queryset和serializer_class
+# 	queryset = Goods.objects.all()
+# 	serializer_class = GoodsSerializer
+
+
+class GoodsPagination(PageNumberPagination):
+	"""自定义分页功能"""
+	# 默认每页显示的个数
+	page_size = 3
+	# 可以动态改变每页显示的个数
+	page_size_query_param = 'page_size'
+	# 页码参数
+	page_query_param = 'page'
+	# 每页显示的最大个数
+	max_page_size = 100
+
+
 class GoodsListView(ListAPIView):
-	"""7.使用django rest framework的ListAPIView实现商品列表页"""
-	# 定义queryset和serializer_class
-	queryset = Goods.objects.all()
+	"""自定义分页功能"""
+	pagination_class = GoodsPagination
+	# 添加order_by才不会提示'分页可能产生不一致的结果'
+	queryset = Goods.objects.all().order_by('id')
 	serializer_class = GoodsSerializer
