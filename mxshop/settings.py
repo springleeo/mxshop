@@ -28,7 +28,7 @@ SECRET_KEY = 'agmx*(mh3#a9ofa)=gr6(63p3^lj@x#g%!=w&*2n8)!jw4uesz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -132,9 +132,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = "/media/"
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, "static"),
 )
+MEDIA_URL = "/media/"  # 图片链接自动补全需求
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # 图片单独访问需要配置路径
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+REST_FRAMEWORK = {
+	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+	'PAGE_SIZE': 10,
+}
