@@ -2,7 +2,6 @@ import json
 
 from django.views.generic import View
 from django.http import HttpResponse, JsonResponse
-from goods.models import Goods
 from django.forms.models import model_to_dict
 from django.core import serializers
 from goods.serializers import GoodsSerializer
@@ -10,9 +9,10 @@ from goods.models import Goods
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import ListModelMixin
+from rest_framework import mixins
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.viewsets import GenericViewSet
 
 
 # class GoodsListView(View):
@@ -69,7 +69,7 @@ from rest_framework.pagination import PageNumberPagination
 # 		return Response(goods_serializer.data)
 
 
-# class GoodsListView(ListModelMixin, GenericAPIView):
+# class GoodsListView(mixins.ListModelMixin, GenericAPIView):
 # 	"""6.使用django rest framework的GenericAPIView和ModelSerializer实现商品列表页"""
 # 	# # 使用GenericAPIView，必须定义queryset和serializer_class
 # 	queryset = Goods.objects.all()
@@ -98,9 +98,18 @@ class GoodsPagination(PageNumberPagination):
 	max_page_size = 100
 
 
-class GoodsListView(ListAPIView):
-	"""自定义分页功能"""
+# class GoodsListView(ListAPIView):
+# 	"""自定义分页功能"""
+# 	pagination_class = GoodsPagination
+# 	# 必须定义一个默认的排序，添加order_by才不会提示'分页可能产生不一致的结果'
+# 	queryset = Goods.objects.all().order_by('id')
+# 	serializer_class = GoodsSerializer
+
+
+class GoodsListViewSet(mixins.ListModelMixin, GenericViewSet):
+	"""使用viewset和Router实现商品列表页"""
+
 	pagination_class = GoodsPagination
-	# 添加order_by才不会提示'分页可能产生不一致的结果'
+	# 必须定义一个默认的排序，添加order_by才不会提示'分页可能产生不一致的结果'
 	queryset = Goods.objects.all().order_by('id')
 	serializer_class = GoodsSerializer
