@@ -20,14 +20,15 @@ import xadmin
 # from goods.views import GoodsListView
 from django.views.static import serve
 from mxshop.settings import MEDIA_ROOT
-from goods.views import GoodsListViewSet
+from goods.views import GoodsListViewSet, CategoryViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 
 # 注册goods的url
 router.register(r'goods', GoodsListViewSet)
-
+# 注册category的url
+router.register(r'categorys', CategoryViewSet)
 
 urlpatterns = [
 	path('', include(router.urls)),

@@ -12,6 +12,7 @@ from goods.models import Goods, GoodsCategory
 
 class GoodsCategorySerializer(serializers.ModelSerializer):
 	"""序列化所有category信息"""
+
 	class Meta:
 		model = GoodsCategory
 		fields = '__all__'
@@ -31,3 +32,34 @@ class GoodsSerializer(serializers.ModelSerializer):
 		model = Goods
 		fields = '__all__'
 
+
+class CategorySerializer3(serializers.ModelSerializer):
+	"""
+	商品三级类目序列化
+	"""
+
+	class Meta:
+		model = GoodsCategory
+		fields = '__all__'
+
+
+class CategorySerializer2(serializers.ModelSerializer):
+	"""
+	商品二级类目序列化
+	"""
+	sub_cat = CategorySerializer3(many=True)
+
+	class Meta:
+		model = GoodsCategory
+		fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+	"""
+	商品一级类目序列化
+	"""
+	sub_cat = CategorySerializer2(many=True)
+
+	class Meta:
+		model = GoodsCategory
+		fields = '__all__'
